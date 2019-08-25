@@ -5,8 +5,8 @@ $input = file_get_contents('php://input');
 $json = json_decode($input);
 $event = $json->events[0];
 
-$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(ENV["CHANNEL_ACCESS_TOKEN"]);
-$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => ENV["CHANNEL_ACCESS_TOKEN"]]);
+$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(CHANNEL_ACCESS_TOKEN);
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => CHANNEL_SECRET]);
 
 //イベントタイプ判別
 if ("message" == $event->type) {            //一般的なメッセージ(文字・イメージ・音声・位置情報・スタンプ含む)
