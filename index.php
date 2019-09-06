@@ -12,8 +12,13 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET
 if ("message" == $event->type) {            //一般的なメッセージ(文字・イメージ・音声・位置情報・スタンプ含む)
     //テキストメッセージにはオウムで返す
     if ("text" == $event->message->type) {
-      $url='http://ja.wikipedia.org/w/api.php?format=xml&action=query&list=search&srlimit=50&srsearch=';
-      $url.=urlencode('親の文字体系');
+      $url = 'http://ja.wikipedia.org/w/api.php?'
+.'format=php&'
+.'action=query&'
+.'prop=revisions&'
+.'rvprop=content&'
+.'rvparse&'
+.'titles='.urlencode('親知らず');
       $ch      = curl_init($url);
       curl_setopt_array($ch, $option);
       $json    = curl_exec($ch);
