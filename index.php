@@ -12,25 +12,7 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET
 if ("message" == $event->type) {            //一般的なメッセージ(文字・イメージ・音声・位置情報・スタンプ含む)
     //テキストメッセージにはオウムで返す
     if ("text" == $event->message->type) {
-      $option = [
-        CURLOPT_RETURNTRANSFER => true, //文字列として返す
-        CURLOPT_TIMEOUT        => 3, // タイムアウト時間
-    ];
-      $url = 'http://ja.wikipedia.org/w/api.php?'
-.'format=php&'
-.'action=query&'
-.'prop=revisions&'
-.'rvprop=content&'
-.'rvparse&'
-.'titles='.urlencode('親知らず');
-      $ch      = curl_init($url);
-      curl_setopt_array($ch, $option);
-      $json    = curl_exec($ch);
-      $info    = curl_getinfo($ch);
-      $errorNo = curl_errno($ch);
-      echo 'jsonだあよ！';
-      echo $json;
-      $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($json);
+        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($event->message->text);
     } else {
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ごめん、わかんなーい(*´ω｀*)");
     }
