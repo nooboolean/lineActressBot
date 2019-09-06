@@ -30,7 +30,7 @@ if ("message" == $event->type) {            //一般的なメッセージ(文字
       $errorNo = curl_errno($ch);
       echo 'jsonだあよ！';
       echo $json;
-      $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($event->message->text);
+      $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($json);
     } else {
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ごめん、わかんなーい(*´ω｀*)");
     }
