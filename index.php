@@ -8,26 +8,20 @@ $event = $json->events[0];
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
 
-//イベントタイプ判別
-if ("message" == $event->type) {            //一般的なメッセージ(文字・イメージ・音声・位置情報・スタンプ含む)
-    //テキストメッセージにはオウムで返す
-    if ("text" == $event->message->type) {
-        $keyword = $event->message->text;
-        $xml = file_get_contents("http://wikipedia.simpleapi.net/api?keyword=${keyword}&output=xml");
-        $xml = simplexml_load_string($xml);
-        $output = '';
-        if ($xml->result[0]->strict == 1){
-          $output = $xml->result[0]->body;
-          $output = (string)$output;
-        } else {
-          $output = 'ちょっと何言ってるかわかんないっす(*´ω｀*)';
-        }
-        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($output);
+if ("message" == $event->type) {
+  if ("text" == $event->message->type) {
+    $keyword = $event->message->text;
+    $xml = file_get_contents("http://wikipedia.simpleapi.net/api?keyword=${keyword}&output=xml");
+    $xml = simplexml_load_string($xml);
+    $output = '';
+    if ($xml->result[0]->strict == 1){
+      $output = $xml->result[0]->body;
+      $output = (string)$output;
     } else {
-        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ごめん、わかんなーい(*´ω｀*)");
+      $output = 'ちょっと何言ってるかわかんないっす(*´ω｀*)';
     }
-} else {
-    //なにもしない
+    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($output);
+  }
 }
 $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 syslog(LOG_EMERG, print_r($event->replyToken, true));
