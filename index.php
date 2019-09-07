@@ -15,8 +15,14 @@ if ("message" == $event->type) {            //一般的なメッセージ(文字
         $keyword = $event->message->text;
         $xml = file_get_contents("http://wikipedia.simpleapi.net/api?keyword=${keyword}&output=xml");
         $xml = simplexml_load_string($xml);
-        $xml = $xml->result[0]->body;
-        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder((string)$xml);
+        $output = '';
+        if ($xml->result[0]->strict == 1){
+          $output = $xml->result[0]->body;
+          $output = (string)$output;
+        } else {
+          $output = 'ちょっと何言ってるかわかんないっす(*´ω｀*';
+        }
+        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($output);
     } else {
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ごめん、わかんなーい(*´ω｀*)");
     }
