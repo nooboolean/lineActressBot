@@ -11,4 +11,4 @@ $url = 'http://ja.wikipedia.org/w/api.php?'
 $json = file_get_contents($url);
 $arry = json_decode($json);
 $data = $arry;
-var_dump($data);
+var_dump($data->{"query"});

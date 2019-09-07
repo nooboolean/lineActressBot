@@ -20,9 +20,8 @@ if ("message" == $event->type) {            //一般的なメッセージ(文字
               .'rvparse&'
               .'titles='.urlencode($event->message->text);
         $json = file_get_contents($url);
-        $arry = json_decode($json);
-        var_dump($arry);
-        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($json);
+        $data = json_decode($json);
+        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($data->{"query"});
     } else {
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ごめん、わかんなーい(*´ω｀*)");
     }
