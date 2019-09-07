@@ -21,7 +21,7 @@ if ("message" == $event->type) {            //一般的なメッセージ(文字
               .'titles='.urlencode($event->message->text);
         $json = file_get_contents($url);
         $arry = json_decode($json);
-        $data = serialize($arry->{"query"});
+        $data = serialize($arry->{"query"}->{"pages"});
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($data);
     } else {
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ごめん、わかんなーい(*´ω｀*)");
