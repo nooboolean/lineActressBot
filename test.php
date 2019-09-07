@@ -10,5 +10,11 @@ $url = 'http://ja.wikipedia.org/w/api.php?'
 
 $json = file_get_contents($url);
 $arry = json_decode($json);
-$data = serialize($arry->{"query"}->{"pages"});
+$arry = $arry->{"query"}->{"pages"};
+        foreach ($arry as $key => $value) {
+          if($key = 'extract'){
+            $data = $value;
+          }
+        }
+$data = serialize($data);
 var_dump($data);
