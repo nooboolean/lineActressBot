@@ -21,6 +21,7 @@ if ("message" == $event->type) {            //一般的なメッセージ(文字
               .'titles='.urlencode($event->message->text);
         $json = file_get_contents($url);
         $arry = json_decode($json);
+        $arry = $arry->{"query"}->{"pages"};
         foreach($arry as $arry1){
           foreach ($arry1 as $key => $value) {
             if($key == 'extract'){
