@@ -20,7 +20,7 @@ if ("message" == $event->type) {            //一般的なメッセージ(文字
           $output = $xml->result[0]->body;
           $output = (string)$output;
         } else {
-          $output = 'ちょっと何言ってるかわかんないっす(*´ω｀*';
+          $output = 'ちょっと何言ってるかわかんないっす(*´ω｀*)';
         }
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($output);
     } else {
