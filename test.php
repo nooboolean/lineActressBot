@@ -9,7 +9,7 @@ $url = 'http://ja.wikipedia.org/w/api.php?'
 .'titles='.urlencode('宇垣美里');
 
 $json = file_get_contents("http://wikipedia.simpleapi.net/api?keyword=宇垣美里&output=xml");
-$xml = new SimpleXMLElement($json);
+$xml = simplexml_load_string($json);
 $xml = $xml->result[0]->body;
 // $arry = json_decode($json);
 // $arry = $arry->{"query"}->{"pages"};
@@ -23,4 +23,4 @@ $xml = $xml->result[0]->body;
 //   }
 // }
 // $data = serialize($data);
-var_dump($xml->asXML());
+var_dump((string)$xml);
