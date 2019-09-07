@@ -26,12 +26,6 @@ if ("message" == $event->type) {            //一般的なメッセージ(文字
     } else {
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ごめん、わかんなーい(*´ω｀*)");
     }
-} elseif ("follow" == $event->type) {        //お友達追加時
-    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("よろしくー");
-} elseif ("join" == $event->type) {           //グループに入ったときのイベント
-    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('こんにちは よろしくー');
-} elseif ('beacon' == $event->type) {         //Beaconイベント
-    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('Godanがいんしたお(・∀・) ');
 } else {
     //なにもしない
 }
