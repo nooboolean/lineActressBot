@@ -33,7 +33,7 @@ if ("message" == $event->type) {            //一般的なメッセージ(文字
         $json = file_get_contents("http://wikipedia.simpleapi.net/api?keyword=宇垣美里&output=xml");
         $xml = new SimpleXMLElement($json);
         $xml = $xml->result[0]->body;
-        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($xml);
+        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($xml->asXML());
     } else {
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ごめん、わかんなーい(*´ω｀*)");
     }

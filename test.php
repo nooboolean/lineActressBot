@@ -23,4 +23,4 @@ $xml = $xml->result[0]->body;
 //   }
 // }
 // $data = serialize($data);
-var_dump($xml);
+var_dump($xml->asXML());
