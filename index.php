@@ -22,7 +22,7 @@ if ("message" == $event->type) {            //一般的なメッセージ(文字
         $json = file_get_contents($url);
         $arry = json_decode($json);
         $data = $arry;
-        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("あああああ");
+        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($json);
     } else {
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ごめん、わかんなーい(*´ω｀*)");
     }
