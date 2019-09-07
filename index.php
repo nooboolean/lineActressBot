@@ -21,13 +21,14 @@ if ("message" == $event->type) {            //一般的なメッセージ(文字
               .'titles='.urlencode($event->message->text);
         $json = file_get_contents($url);
         $arry = json_decode($json);
-        $arry = $arry->{"query"}->{"pages"};
-        foreach ($arry as $key => $value) {
-          if($key = 'extract'){
-            $data = $value;
+        foreach($arry as $arry1){
+          foreach ($arry1 as $key => $value) {
+            if($key == 'extract'){
+              $data = $value;
+              $data = serialize($data);
+            }
           }
         }
-        $data = serialize($data);
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($data);
     } else {
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ごめん、わかんなーい(*´ω｀*)");
