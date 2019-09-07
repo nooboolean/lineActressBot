@@ -14,7 +14,7 @@ if ("message" == $event->type) {            //一般的なメッセージ(文字
     if ("text" == $event->message->type) {
         $keyword = $event->message->text;
         $xml = file_get_contents("http://wikipedia.simpleapi.net/api?keyword=${keyword}&output=xml");
-        $xml = simplexml_load_string($json);
+        $xml = simplexml_load_string($xml);
         $xml = $xml->result[0]->body;
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder((string)$xml);
     } else {
