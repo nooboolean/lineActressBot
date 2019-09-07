@@ -7,9 +7,10 @@ $url = 'http://ja.wikipedia.org/w/api.php?'
 .'rvprop=content&'
 .'rvparse&'
 .'titles='.urlencode('宇垣美里');
-
-$json = file_get_contents("http://wikipedia.simpleapi.net/api?keyword=宇垣美里&output=xml");
+$keyword = '宇垣美里';
+$json = file_get_contents("http://wikipedia.simpleapi.net/api?keyword=${keyword}&output=xml");
 $xml = simplexml_load_string($json);
+if ($xml->result[0]->strict == 1){
 $xml = $xml->result[0]->body;
 // $arry = json_decode($json);
 // $arry = $arry->{"query"}->{"pages"};
@@ -24,3 +25,7 @@ $xml = $xml->result[0]->body;
 // }
 // $data = serialize($data);
 var_dump((string)$xml);
+}
+else {
+  var_dump("だめだ〜");
+}

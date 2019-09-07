@@ -12,25 +12,8 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET
 if ("message" == $event->type) {            //一般的なメッセージ(文字・イメージ・音声・位置情報・スタンプ含む)
     //テキストメッセージにはオウムで返す
     if ("text" == $event->message->type) {
-        // $url = 'http://ja.wikipedia.org/w/api.php?'
-        //       .'format=json&'
-        //       .'action=query&'
-        //       .'prop=extracts&'
-        //       .'rvprop=content&'
-        //       .'rvparse&'
-        //       .'titles='.urlencode($event->message->text);
-        // $json = file_get_contents($url);
-        // $arry = json_decode($json);
-        // $arry = $arry->{"query"}->{"pages"};
-        // foreach($arry as $arry1){
-        //   foreach ($arry1 as $key => $value) {
-        //     if($key == 'extract'){
-        //       $data = $value;
-        //       $data = serialize($data);
-        //     }
-        //   }
-        // }
-        $json = file_get_contents("http://wikipedia.simpleapi.net/api?keyword=宇垣美里&output=xml");
+        $keyword = $event->message->text;
+        $xml = file_get_contents("http://wikipedia.simpleapi.net/api?keyword=${keyword}&output=xml");
         $xml = simplexml_load_string($json);
         $xml = $xml->result[0]->body;
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder((string)$xml);
