@@ -1,5 +1,4 @@
 <?php
-
 $url = 'http://ja.wikipedia.org/w/api.php?'
 .'format=xml&'
 .'action=query&'
@@ -29,3 +28,4 @@ var_dump((string)$xml);
 else {
   var_dump("だめだ〜");
 }
+//https://www.google.com/search?hl=jp&q=%E5%AE%87%E5%9E%A3%E7%BE%8E%E9%87%8C&btnG=Google+Search&tbs=0&safe=off&tbm=isch
