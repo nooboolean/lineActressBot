@@ -11,10 +11,10 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET
 
 if ($event->type == "message") {
   if ($event->message->type == "text") {
-      if (preg_match('/変態メガネ/', $received_message)){
-        $output = '調べて欲しい女優の名前を言ってみたまえ';
-      } else {
-        $received_message = $event->message->text;
+    $received_message = $event->message->text;
+    if (preg_match('/変態メガネ/', $received_message)){
+      $output = '調べて欲しい女優の名前を言ってみたまえ';
+    } else {
       $xml = file_get_contents("http://wikipedia.simpleapi.net/api?keyword=${received_message}&output=xml");
       $xml = simplexml_load_string($xml);
       $output = '';
